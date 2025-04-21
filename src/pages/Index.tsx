@@ -1,7 +1,15 @@
+
 import { useState, useEffect } from "react";
-import { ArrowDown, ArrowRight, Mail, Phone, Star, Search, Edit } from "lucide-react";
+import { ArrowDown, ArrowRight, Mail, Phone, Star, Search, Edit, Check, WhatsApp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState({
@@ -62,6 +70,18 @@ const Index = () => {
       company: "Green Earth Cafe",
       quote: "The team at Web Crave understood our vision perfectly. They created a website that captures our brand essence.",
       stars: 5
+    },
+    {
+      name: "David Wilson",
+      company: "Wilson Photography",
+      quote: "Since launching my new portfolio website, I've received more client inquiries than ever before. The design is exactly what I wanted!",
+      stars: 5
+    },
+    {
+      name: "Jennifer Lee",
+      company: "Urban Fitness",
+      quote: "Our membership signups increased by 30% in the first month after launching our new website. The mobile experience is fantastic!",
+      stars: 5
     }
   ];
 
@@ -80,6 +100,21 @@ const Index = () => {
       title: "Artisan Bakery",
       description: "E-commerce site with local delivery integration",
       image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop"
+    },
+    {
+      title: "Photography Portfolio",
+      description: "Minimalist design with dynamic gallery features",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2000&auto=format&fit=crop"
+    },
+    {
+      title: "Fitness Center",
+      description: "Membership system with class scheduling",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
+    },
+    {
+      title: "Organic Skincare Brand",
+      description: "Product showcase with e-commerce integration",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2000&auto=format&fit=crop"
     }
   ];
 
@@ -106,7 +141,7 @@ const Index = () => {
             <a href="#testimonials" className="text-gray-700 hover:text-orange-500 transition duration-300">Testimonials</a>
             <a href="#contact" className="text-gray-700 hover:text-orange-500 transition duration-300">Contact</a>
           </div>
-          <Button className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
+          <Button className="bg-gradient-to-r from-orange-500 to-red-500 text-white" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
             Get Started
           </Button>
         </div>
@@ -131,10 +166,17 @@ const Index = () => {
                 We design stunning websites that convert visitors into customers and rank higher in search results.
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-red-500 hover:to-orange-500 text-white px-8 py-3 text-lg transition-all duration-300">
+                <Button 
+                  className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-red-500 hover:to-orange-500 text-white px-8 py-3 text-lg transition-all duration-300"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   Get a Quote <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button variant="outline" className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 text-lg">
+                <Button 
+                  variant="outline" 
+                  className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 text-lg"
+                  onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   View Our Work
                 </Button>
               </div>
@@ -306,31 +348,33 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {portfolioItems.map((item, index) => (
-              <div 
-                key={index}
-                className={`group relative overflow-hidden rounded-lg shadow-lg transition-all duration-700 transform ${isVisible.portfolio ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
-                style={{ transitionDelay: `${index * 200}ms` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{item.description}</p>
-                </div>
+          <div className="mx-auto max-w-5xl px-8">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {portfolioItems.map((item, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="p-2">
+                      <div className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-700 transform h-80">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <img 
+                          src={item.image} 
+                          alt={item.title} 
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+                          <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                          <p className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{item.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-end space-x-2 mt-4">
+                <CarouselPrevious className="relative -left-0" />
+                <CarouselNext className="relative -right-0" />
               </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Button variant="outline" className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 text-lg">
-              View Full Portfolio
-            </Button>
+            </Carousel>
           </div>
         </div>
       </section>
@@ -348,30 +392,38 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={index}
-                className={`bg-white p-8 rounded-lg shadow-lg transition-all duration-700 transform ${isVisible.testimonials ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
-                style={{ transitionDelay: `${index * 200}ms` }}
-              >
-                <div className="flex mb-4">
-                  {[...Array(testimonial.stars)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-amber-500 fill-amber-500" />
-                  ))}
-                </div>
-                <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
-                <div className="flex items-center">
-                  <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-xl">
-                    {testimonial.name.charAt(0)}
-                  </div>
-                  <div className="ml-4">
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-gray-500 text-sm">{testimonial.company}</p>
-                  </div>
-                </div>
+          <div className="mx-auto max-w-5xl px-8">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2">
+                    <div className="p-2">
+                      <div className="bg-white p-8 rounded-lg shadow-lg h-full">
+                        <div className="flex mb-4">
+                          {[...Array(testimonial.stars)].map((_, i) => (
+                            <Star key={i} className="w-5 h-5 text-amber-500 fill-amber-500" />
+                          ))}
+                        </div>
+                        <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
+                        <div className="flex items-center">
+                          <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-xl">
+                            {testimonial.name.charAt(0)}
+                          </div>
+                          <div className="ml-4">
+                            <p className="font-semibold">{testimonial.name}</p>
+                            <p className="text-gray-500 text-sm">{testimonial.company}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-end space-x-2 mt-4">
+                <CarouselPrevious className="relative -left-0" />
+                <CarouselNext className="relative -right-0" />
               </div>
-            ))}
+            </Carousel>
           </div>
         </div>
       </section>
@@ -404,6 +456,15 @@ const Index = () => {
                     </div>
                   </div>
                   <div className="flex items-center">
+                    <div className="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                      <WhatsApp className="h-5 w-5 text-green-500" />
+                    </div>
+                    <div>
+                      <p className="text-gray-500 text-sm">WhatsApp</p>
+                      <a href="https://wa.me/9806812912" className="font-medium hover:text-green-500 transition-colors">+977 9806812912</a>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
                     <div className="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
                       <Mail className="h-5 w-5 text-orange-500" />
                     </div>
@@ -420,33 +481,25 @@ const Index = () => {
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <Check className="h-4 w-4 text-green-600" />
                     </div>
                     <p className="text-gray-600">7+ years of experience in web design and development</p>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <Check className="h-4 w-4 text-green-600" />
                     </div>
                     <p className="text-gray-600">Proven track record of increasing client conversions</p>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <Check className="h-4 w-4 text-green-600" />
                     </div>
                     <p className="text-gray-600">Comprehensive SEO and performance optimization</p>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <Check className="h-4 w-4 text-green-600" />
                     </div>
                     <p className="text-gray-600">Ongoing support and maintenance packages</p>
                   </li>
