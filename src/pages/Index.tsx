@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { ArrowDown, ArrowRight, Mail, Phone, Star, Search, Edit, Check, WhatsApp } from "lucide-react";
+import { ArrowDown, ArrowRight, Mail, Phone, Star, Search, Edit, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { 
@@ -457,7 +456,12 @@ const Index = () => {
                   </div>
                   <div className="flex items-center">
                     <div className="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
-                      <WhatsApp className="h-5 w-5 text-green-500" />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                        <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                        <path d="M13.5 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                        <path d="M9 14a5 5 0 0 0 6 0" />
+                      </svg>
                     </div>
                     <div>
                       <p className="text-gray-500 text-sm">WhatsApp</p>
@@ -560,29 +564,4 @@ const Index = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">Contact</h4>
               <ul className="space-y-2">
-                <li className="flex items-center text-gray-400">
-                  <Phone className="h-4 w-4 mr-2" /> +977 9806812912
-                </li>
-                <li className="flex items-center text-gray-400">
-                  <Mail className="h-4 w-4 mr-2" /> sg750053@gmail.com
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">© 2024 Web Crave. All rights reserved.</p>
-            <div className="mt-4 md:mt-0">
-              <ul className="flex space-x-8">
-                <li><a href="#" className="text-gray-400 hover:text-orange-500 text-sm">Privacy Policy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-orange-500 text-sm">Terms of Service</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-export default Index;
+                <li
