@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ArrowDown, ArrowRight, Mail, Phone, Star, Search, Edit, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,10 +21,8 @@ const Index = () => {
   });
 
   useEffect(() => {
-    // Set hero immediately visible
     setIsVisible(prev => ({ ...prev, hero: true }));
     
-    // Set other sections to visible after a delay
     const observerOptions = {
       threshold: 0.25
     };
@@ -120,432 +117,434 @@ const Index = () => {
 
   return (
     <div className="overflow-x-hidden">
-      {/* Navigation */}
-      <nav className="fixed w-full bg-white/90 backdrop-blur-sm z-50 border-b border-orange-100">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <a href="/" className="flex items-center space-x-2">
-            <img
-              src="/lovable-uploads/d97a8bfa-8eb2-41e4-9a26-4d4c928880dc.png"
-              alt="Web Crave Logo"
-              className="w-10 h-10"
-              draggable={false}
-            />
-            <span className="text-2xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent select-none">
-              Web Crave
-            </span>
-          </a>
-          <div className="hidden md:flex space-x-8">
-            <a href="#services" className="text-gray-700 hover:text-orange-500 transition duration-300">Services</a>
-            <a href="#benefits" className="text-gray-700 hover:text-orange-500 transition duration-300">Benefits</a>
-            <a href="#portfolio" className="text-gray-700 hover:text-orange-500 transition duration-300">Portfolio</a>
-            <a href="#testimonials" className="text-gray-700 hover:text-orange-500 transition duration-300">Testimonials</a>
-            <a href="#contact" className="text-gray-700 hover:text-orange-500 transition duration-300">Contact</a>
-          </div>
-          <Button className="bg-gradient-to-r from-orange-500 to-red-500 text-white" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-            Get Started
-          </Button>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section 
-        id="hero"
-        className={`min-h-screen pt-24 flex items-center bg-gradient-to-b from-orange-50 to-white transition-opacity duration-1000 ${isVisible.hero ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <div className="container mx-auto px-4 py-20">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-12 md:mb-0 transform transition-all duration-1000" 
-                style={{ 
-                  transform: isVisible.hero ? 'translateX(0)' : 'translateX(-100px)',
-                  opacity: isVisible.hero ? 1 : 0 
-                }}>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Elevate</span> Your Digital Presence
-              </h1>
-              <p className="text-xl text-gray-700 mb-8">
-                We design stunning websites that convert visitors into customers and rank higher in search results.
-              </p>
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <Button 
-                  className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-red-500 hover:to-orange-500 text-white px-8 py-3 text-lg transition-all duration-300"
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  Get a Quote <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 text-lg"
-                  onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  View Our Work
-                </Button>
-              </div>
-            </div>
-            <div className="md:w-1/2 transform transition-all duration-1000" 
-                style={{ 
-                  transform: isVisible.hero ? 'translateX(0)' : 'translateX(100px)',
-                  opacity: isVisible.hero ? 1 : 0 
-                }}>
-              <div className="relative">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg blur-lg opacity-50"></div>
-                <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Web design process" 
-                    className="w-full h-auto" 
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-center mt-20">
-            <a href="#services" className="animate-bounce bg-white p-2 w-10 h-10 ring-1 ring-orange-200 shadow-lg rounded-full flex items-center justify-center">
-              <ArrowDown className="h-6 w-6 text-orange-500" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section 
-        id="services"
-        className={`py-20 transition-opacity duration-1000 ${isVisible.services ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Our <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Services</span></h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We provide comprehensive web solutions tailored to your business needs
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className={`p-8 hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 border-t-4 border-orange-500 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                style={{ transitionDelay: '0ms' }}>
-              <div className="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Edit className="h-8 w-8 text-orange-500" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-4">Website Design</h3>
-              <p className="text-gray-600 mb-4">
-                Custom, responsive designs that look amazing on all devices and represent your brand perfectly.
-              </p>
-              <a href="#contact" className="text-orange-500 inline-flex items-center font-medium hover:underline">
-                Learn more <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
-            </Card>
-
-            <Card className={`p-8 hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 border-t-4 border-red-500 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                style={{ transitionDelay: '200ms' }}>
-              <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Search className="h-8 w-8 text-red-500" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-4">SEO Optimization</h3>
-              <p className="text-gray-600 mb-4">
-                Strategic optimization that helps your website rank higher in search results and attract more visitors.
-              </p>
-              <a href="#contact" className="text-red-500 inline-flex items-center font-medium hover:underline">
-                Learn more <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
-            </Card>
-
-            <Card className={`p-8 hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 border-t-4 border-amber-500 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                style={{ transitionDelay: '400ms' }}>
-              <div className="bg-amber-100 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Star className="h-8 w-8 text-amber-500" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-4">Brand Strategy</h3>
-              <p className="text-gray-600 mb-4">
-                Comprehensive branding solutions that help your business stand out and connect with your target audience.
-              </p>
-              <a href="#contact" className="text-amber-500 inline-flex items-center font-medium hover:underline">
-                Learn more <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section 
-        id="benefits"
-        className={`py-20 bg-gradient-to-r from-orange-50 to-amber-50 transition-opacity duration-1000 ${isVisible.benefits ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Why Choose <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Web Crave</span></h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Our websites don't just look good, they perform better in every way that matters
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div className={`transition-all duration-1000 delay-300 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
-              <img 
-                src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop" 
-                alt="Analytics dashboard showing website performance" 
-                className="rounded-lg shadow-xl"
+      <header>
+        <nav className="fixed w-full bg-white/90 backdrop-blur-sm z-50 border-b border-orange-100" aria-label="Primary navigation">
+          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" className="flex items-center space-x-2" aria-label="Web Crave Home">
+              <img
+                src="/lovable-uploads/d97a8bfa-8eb2-41e4-9a26-4d4c928880dc.png"
+                alt="Web Crave logo"
+                className="w-10 h-10"
+                draggable={false}
               />
+              <span className="text-2xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent select-none">
+                Web Crave
+              </span>
+            </a>
+            <div className="hidden md:flex space-x-8" role="navigation">
+              <a href="#services" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Services">Services</a>
+              <a href="#benefits" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Benefits">Benefits</a>
+              <a href="#portfolio" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Portfolio">Portfolio</a>
+              <a href="#testimonials" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Testimonials">Testimonials</a>
+              <a href="#contact" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Contact">Contact</a>
             </div>
-            <div>
-              <div className={`mb-8 transition-all duration-700 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
-                  style={{ transitionDelay: '0ms' }}>
-                <h3 className="text-2xl font-semibold mb-3 flex items-center">
-                  <span className="bg-orange-100 text-orange-500 rounded-full w-8 h-8 flex items-center justify-center mr-3">1</span>
-                  Higher Search Rankings
-                </h3>
-                <p className="text-gray-600 pl-11">
-                  We build websites with clean code and implement proven SEO strategies that help your business get found more easily online.
+            <Button className="bg-gradient-to-r from-orange-500 to-red-500 text-white"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              aria-label="Get Started - Contact Section"
+            >
+              Get Started
+            </Button>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section 
+          id="hero"
+          className={`min-h-screen pt-24 flex items-center bg-gradient-to-b from-orange-50 to-white transition-opacity duration-1000 ${isVisible.hero ? 'opacity-100' : 'opacity-0'}`}
+          aria-labelledby="hero-title"
+        >
+          <div className="container mx-auto px-4 py-20">
+            <div className="flex flex-col md:flex-row items-center">
+              <div className="md:w-1/2 mb-12 md:mb-0 transform transition-all duration-1000" 
+                  style={{ 
+                    transform: isVisible.hero ? 'translateX(0)' : 'translateX(-100px)',
+                    opacity: isVisible.hero ? 1 : 0 
+                  }}>
+                <h1 id="hero-title" className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                  <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Elevate</span> Your Digital Presence
+                </h1>
+                <p className="text-xl text-gray-700 mb-8">
+                  We design stunning websites that convert visitors into customers and rank higher in search results.
                 </p>
-              </div>
-
-              <div className={`mb-8 transition-all duration-700 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
-                  style={{ transitionDelay: '150ms' }}>
-                <h3 className="text-2xl font-semibold mb-3 flex items-center">
-                  <span className="bg-red-100 text-red-500 rounded-full w-8 h-8 flex items-center justify-center mr-3">2</span>
-                  Increased Conversion Rates
-                </h3>
-                <p className="text-gray-600 pl-11">
-                  Our strategic layouts and compelling calls-to-action are designed to turn more of your visitors into paying customers.
-                </p>
-              </div>
-
-              <div className={`mb-8 transition-all duration-700 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
-                  style={{ transitionDelay: '300ms' }}>
-                <h3 className="text-2xl font-semibold mb-3 flex items-center">
-                  <span className="bg-amber-100 text-amber-500 rounded-full w-8 h-8 flex items-center justify-center mr-3">3</span>
-                  Mobile Optimization
-                </h3>
-                <p className="text-gray-600 pl-11">
-                  Every website we build works flawlessly across all devices, ensuring you never lose a customer due to poor mobile experience.
-                </p>
-              </div>
-
-              <div className={`transition-all duration-700 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
-                  style={{ transitionDelay: '450ms' }}>
-                <h3 className="text-2xl font-semibold mb-3 flex items-center">
-                  <span className="bg-orange-100 text-orange-500 rounded-full w-8 h-8 flex items-center justify-center mr-3">4</span>
-                  Fast Loading Speeds
-                </h3>
-                <p className="text-gray-600 pl-11">
-                  We optimize every aspect of your website for speed, because faster websites rank better and keep visitors engaged longer.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Portfolio Section */}
-      <section 
-        id="portfolio"
-        className={`py-20 transition-opacity duration-1000 ${isVisible.portfolio ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Our <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Portfolio</span></h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Take a look at some of our recent projects
-            </p>
-          </div>
-
-          <div className="mx-auto max-w-5xl px-8">
-            <Carousel className="w-full">
-              <CarouselContent>
-                {portfolioItems.map((item, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                    <div className="p-2">
-                      <div className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-700 transform h-80">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <img 
-                          src={item.image} 
-                          alt={item.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
-                          <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                          <p className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{item.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex justify-end space-x-2 mt-4">
-                <CarouselPrevious className="relative -left-0" />
-                <CarouselNext className="relative -right-0" />
-              </div>
-            </Carousel>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section 
-        id="testimonials"
-        className={`py-20 bg-gradient-to-r from-orange-50 to-amber-50 transition-opacity duration-1000 ${isVisible.testimonials ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">What Our <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Clients Say</span></h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Don't just take our word for it
-            </p>
-          </div>
-
-          <div className="mx-auto max-w-5xl px-8">
-            <Carousel className="w-full">
-              <CarouselContent>
-                {testimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2">
-                    <div className="p-2">
-                      <div className="bg-white p-8 rounded-lg shadow-lg h-full">
-                        <div className="flex mb-4">
-                          {[...Array(testimonial.stars)].map((_, i) => (
-                            <Star key={i} className="w-5 h-5 text-amber-500 fill-amber-500" />
-                          ))}
-                        </div>
-                        <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
-                        <div className="flex items-center">
-                          <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-xl">
-                            {testimonial.name.charAt(0)}
-                          </div>
-                          <div className="ml-4">
-                            <p className="font-semibold">{testimonial.name}</p>
-                            <p className="text-gray-500 text-sm">{testimonial.company}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex justify-end space-x-2 mt-4">
-                <CarouselPrevious className="relative -left-0" />
-                <CarouselNext className="relative -right-0" />
-              </div>
-            </Carousel>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section 
-        id="contact"
-        className={`py-20 transition-opacity duration-1000 ${isVisible.contact ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Get in <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Touch</span></h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Ready to elevate your online presence? Let's talk about your project.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-            <div className="lg:col-span-2">
-              <div className={`mb-12 transition-all duration-700 ${isVisible.contact ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
-                <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
-                <div className="space-y-6">
-                  <div className="flex items-center">
-                    <div className="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
-                      <Phone className="h-5 w-5 text-orange-500" />
-                    </div>
-                    <div>
-                      <p className="text-gray-500 text-sm">Call us</p>
-                      <p className="font-medium">+977 9806812912</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
-                        <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
-                        <path d="M13.5 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
-                        <path d="M9 14a5 5 0 0 0 6 0" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-gray-500 text-sm">WhatsApp</p>
-                      <a href="https://wa.me/9806812912" className="font-medium hover:text-green-500 transition-colors">+977 9806812912</a>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
-                      <Mail className="h-5 w-5 text-orange-500" />
-                    </div>
-                    <div>
-                      <p className="text-gray-500 text-sm">Email us</p>
-                      <p className="font-medium">sg750053@gmail.com</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className={`transition-all duration-700 delay-300 ${isVisible.contact ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
-                <h3 className="text-2xl font-semibold mb-6">Why Work With Us</h3>
-                <ul className="space-y-4">
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
-                      <Check className="h-4 w-4 text-green-600" />
-                    </div>
-                    <p className="text-gray-600">7+ years of experience in web design and development</p>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
-                      <Check className="h-4 w-4 text-green-600" />
-                    </div>
-                    <p className="text-gray-600">Proven track record of increasing client conversions</p>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
-                      <Check className="h-4 w-4 text-green-600" />
-                    </div>
-                    <p className="text-gray-600">Comprehensive SEO and performance optimization</p>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
-                      <Check className="h-4 w-4 text-green-600" />
-                    </div>
-                    <p className="text-gray-600">Ongoing support and maintenance packages</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="lg:col-span-3">
-              <div className={`bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-1000 ${isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-                <div className="p-6 bg-gradient-to-r from-orange-500 to-red-500 text-white">
-                  <h3 className="text-2xl font-semibold">Request a Quote</h3>
-                  <p>Fill out the form below and we'll get back to you as soon as possible.</p>
-                </div>
-                <div className="p-6">
-                  <iframe 
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSfU5PSahmp_1BKI-GzJd9pVU-0oK3T0fhnawIy7nQ0F9I32_g/viewform?embedded=true" 
-                    width="100%" 
-                    height="600" 
-                    frameBorder="0" 
-                    marginHeight={0} 
-                    marginWidth={0}
-                    title="Contact Form"
-                    className="w-full"
+                <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                  <Button 
+                    className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-red-500 hover:to-orange-500 text-white px-8 py-3 text-lg transition-all duration-300"
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    aria-label="Get a Quote - Contact Section"
                   >
-                    Loading…
-                  </iframe>
+                    Get a Quote <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 text-lg"
+                    onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+                    aria-label="View Our Work - Portfolio"
+                  >
+                    View Our Work
+                  </Button>
+                </div>
+              </div>
+              <div className="md:w-1/2 transform transition-all duration-1000" 
+                  style={{ 
+                    transform: isVisible.hero ? 'translateX(0)' : 'translateX(100px)',
+                    opacity: isVisible.hero ? 1 : 0 
+                  }}>
+                <div className="relative">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg blur-lg opacity-50"></div>
+                  <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" 
+                      alt="Display showing web design process and analytics"
+                      className="w-full h-auto" 
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center mt-20">
+              <a href="#services" className="animate-bounce bg-white p-2 w-10 h-10 ring-1 ring-orange-200 shadow-lg rounded-full flex items-center justify-center" aria-label="Scroll down to services">
+                <ArrowDown className="h-6 w-6 text-orange-500" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section 
+          id="services"
+          className={`py-20 transition-opacity duration-1000 ${isVisible.services ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">Our <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Services</span></h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                We provide comprehensive web solutions tailored to your business needs
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card className={`p-8 hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 border-t-4 border-orange-500 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                  style={{ transitionDelay: '0ms' }}>
+                <div className="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                  <Edit className="h-8 w-8 text-orange-500" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4">Website Design</h3>
+                <p className="text-gray-600 mb-4">
+                  Custom, responsive designs that look amazing on all devices and represent your brand perfectly.
+                </p>
+                <a href="#contact" className="text-orange-500 inline-flex items-center font-medium hover:underline">
+                  Learn more <ArrowRight className="ml-1 h-4 w-4" />
+                </a>
+              </Card>
+
+              <Card className={`p-8 hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 border-t-4 border-red-500 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                  style={{ transitionDelay: '200ms' }}>
+                <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                  <Search className="h-8 w-8 text-red-500" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4">SEO Optimization</h3>
+                <p className="text-gray-600 mb-4">
+                  Strategic optimization that helps your website rank higher in search results and attract more visitors.
+                </p>
+                <a href="#contact" className="text-red-500 inline-flex items-center font-medium hover:underline">
+                  Learn more <ArrowRight className="ml-1 h-4 w-4" />
+                </a>
+              </Card>
+
+              <Card className={`p-8 hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 border-t-4 border-amber-500 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                  style={{ transitionDelay: '400ms' }}>
+                <div className="bg-amber-100 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                  <Star className="h-8 w-8 text-amber-500" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4">Brand Strategy</h3>
+                <p className="text-gray-600 mb-4">
+                  Comprehensive branding solutions that help your business stand out and connect with your target audience.
+                </p>
+                <a href="#contact" className="text-amber-500 inline-flex items-center font-medium hover:underline">
+                  Learn more <ArrowRight className="ml-1 h-4 w-4" />
+                </a>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section 
+          id="benefits"
+          className={`py-20 bg-gradient-to-r from-orange-50 to-amber-50 transition-opacity duration-1000 ${isVisible.benefits ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">Why Choose <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Web Crave</span></h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Our websites don't just look good, they perform better in every way that matters
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <div className={`transition-all duration-1000 delay-300 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
+                <img 
+                  src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Analytics dashboard showing website performance" 
+                  className="rounded-lg shadow-xl"
+                />
+              </div>
+              <div>
+                <div className={`mb-8 transition-all duration-700 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
+                    style={{ transitionDelay: '0ms' }}>
+                  <h3 className="text-2xl font-semibold mb-3 flex items-center">
+                    <span className="bg-orange-100 text-orange-500 rounded-full w-8 h-8 flex items-center justify-center mr-3">1</span>
+                    Higher Search Rankings
+                  </h3>
+                  <p className="text-gray-600 pl-11">
+                    We build websites with clean code and implement proven SEO strategies that help your business get found more easily online.
+                  </p>
+                </div>
+
+                <div className={`mb-8 transition-all duration-700 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
+                    style={{ transitionDelay: '150ms' }}>
+                  <h3 className="text-2xl font-semibold mb-3 flex items-center">
+                    <span className="bg-red-100 text-red-500 rounded-full w-8 h-8 flex items-center justify-center mr-3">2</span>
+                    Increased Conversion Rates
+                  </h3>
+                  <p className="text-gray-600 pl-11">
+                    Our strategic layouts and compelling calls-to-action are designed to turn more of your visitors into paying customers.
+                  </p>
+                </div>
+
+                <div className={`mb-8 transition-all duration-700 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
+                    style={{ transitionDelay: '300ms' }}>
+                  <h3 className="text-2xl font-semibold mb-3 flex items-center">
+                    <span className="bg-amber-100 text-amber-500 rounded-full w-8 h-8 flex items-center justify-center mr-3">3</span>
+                    Mobile Optimization
+                  </h3>
+                  <p className="text-gray-600 pl-11">
+                    Every website we build works flawlessly across all devices, ensuring you never lose a customer due to poor mobile experience.
+                  </p>
+                </div>
+
+                <div className={`transition-all duration-700 ${isVisible.benefits ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}
+                    style={{ transitionDelay: '450ms' }}>
+                  <h3 className="text-2xl font-semibold mb-3 flex items-center">
+                    <span className="bg-orange-100 text-orange-500 rounded-full w-8 h-8 flex items-center justify-center mr-3">4</span>
+                    Fast Loading Speeds
+                  </h3>
+                  <p className="text-gray-600 pl-11">
+                    We optimize every aspect of your website for speed, because faster websites rank better and keep visitors engaged longer.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
+        <section 
+          id="portfolio"
+          className={`py-20 transition-opacity duration-1000 ${isVisible.portfolio ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">Our <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Portfolio</span></h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Take a look at some of our recent projects
+              </p>
+            </div>
+
+            <div className="mx-auto max-w-5xl px-8">
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {portfolioItems.map((item, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                      <div className="p-2">
+                        <div className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-700 transform h-80">
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <img 
+                            src={item.image} 
+                            alt={item.title} 
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                            <p className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{item.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-end space-x-2 mt-4">
+                  <CarouselPrevious className="relative -left-0" />
+                  <CarouselNext className="relative -right-0" />
+                </div>
+              </Carousel>
+            </div>
+          </div>
+        </section>
+
+        <section 
+          id="testimonials"
+          className={`py-20 bg-gradient-to-r from-orange-50 to-amber-50 transition-opacity duration-1000 ${isVisible.testimonials ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">What Our <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Clients Say</span></h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Don't just take our word for it
+              </p>
+            </div>
+
+            <div className="mx-auto max-w-5xl px-8">
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {testimonials.map((testimonial, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2">
+                      <div className="p-2">
+                        <div className="bg-white p-8 rounded-lg shadow-lg h-full">
+                          <div className="flex mb-4">
+                            {[...Array(testimonial.stars)].map((_, i) => (
+                              <Star key={i} className="w-5 h-5 text-amber-500 fill-amber-500" />
+                            ))}
+                          </div>
+                          <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
+                          <div className="flex items-center">
+                            <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-xl">
+                              {testimonial.name.charAt(0)}
+                            </div>
+                            <div className="ml-4">
+                              <p className="font-semibold">{testimonial.name}</p>
+                              <p className="text-gray-500 text-sm">{testimonial.company}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-end space-x-2 mt-4">
+                  <CarouselPrevious className="relative -left-0" />
+                  <CarouselNext className="relative -right-0" />
+                </div>
+              </Carousel>
+            </div>
+          </div>
+        </section>
+
+        <section 
+          id="contact"
+          className={`py-20 transition-opacity duration-1000 ${isVisible.contact ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">Get in <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Touch</span></h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Ready to elevate your online presence? Let's talk about your project.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+              <div className="lg:col-span-2">
+                <div className={`mb-12 transition-all duration-700 ${isVisible.contact ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
+                  <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+                  <div className="space-y-6">
+                    <div className="flex items-center">
+                      <div className="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                        <Phone className="h-5 w-5 text-orange-500" />
+                      </div>
+                      <div>
+                        <p className="text-gray-500 text-sm">Call us</p>
+                        <p className="font-medium">+977 9806812912</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                          <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                          <path d="M13.5 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                          <path d="M9 14a5 5 0 0 0 6 0" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-gray-500 text-sm">WhatsApp</p>
+                        <a href="https://wa.me/9806812912" className="font-medium hover:text-green-500 transition-colors">+977 9806812912</a>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                        <Mail className="h-5 w-5 text-orange-500" />
+                      </div>
+                      <div>
+                        <p className="text-gray-500 text-sm">Email us</p>
+                        <p className="font-medium">sg750053@gmail.com</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`transition-all duration-700 delay-300 ${isVisible.contact ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
+                  <h3 className="text-2xl font-semibold mb-6">Why Work With Us</h3>
+                  <ul className="space-y-4">
+                    <li className="flex items-start">
+                      <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
+                        <Check className="h-4 w-4 text-green-600" />
+                      </div>
+                      <p className="text-gray-600">7+ years of experience in web design and development</p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
+                        <Check className="h-4 w-4 text-green-600" />
+                      </div>
+                      <p className="text-gray-600">Proven track record of increasing client conversions</p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
+                        <Check className="h-4 w-4 text-green-600" />
+                      </div>
+                      <p className="text-gray-600">Comprehensive SEO and performance optimization</p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="bg-green-100 rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3">
+                        <Check className="h-4 w-4 text-green-600" />
+                      </div>
+                      <p className="text-gray-600">Ongoing support and maintenance packages</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="lg:col-span-3">
+                <div className={`bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-1000 ${isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+                  <div className="p-6 bg-gradient-to-r from-orange-500 to-red-500 text-white">
+                    <h3 className="text-2xl font-semibold">Request a Quote</h3>
+                    <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                  </div>
+                  <div className="p-6">
+                    <iframe 
+                      src="https://docs.google.com/forms/d/e/1FAIpQLSfU5PSahmp_1BKI-GzJd9pVU-0oK3T0fhnawIy7nQ0F9I32_g/viewform?embedded=true" 
+                      width="100%" 
+                      height="600" 
+                      frameBorder="0" 
+                      marginHeight={0} 
+                      marginWidth={0}
+                      title="Contact Form"
+                      className="w-full"
+                    >
+                      Loading…
+                    </iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-gray-900 text-white py-16" aria-label="Website footer">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="md:col-span-2 flex items-center space-x-4">
               <img
                 src="/lovable-uploads/d97a8bfa-8eb2-41e4-9a26-4d4c928880dc.png"
-                alt="Web Crave Logo"
+                alt="Web Crave logo"
                 className="w-12 h-12 select-none"
                 draggable={false}
               />
@@ -574,7 +573,6 @@ const Index = () => {
               </ul>
             </div>
           </div>
-          
           <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">© 2024 Web Crave. All rights reserved.</p>
             <div className="mt-4 md:mt-0">
