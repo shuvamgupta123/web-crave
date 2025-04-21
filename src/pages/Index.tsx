@@ -84,35 +84,35 @@ const Index = () => {
 
   const portfolioItems = [
     {
-      title: "Luxury Spa Retreat",
-      description: "Complete brand redesign with booking functionality",
-      image: "https://images.unsplash.com/photo-1596178060873-8a5cd413c9fb?q=80&w=2069&auto=format&fit=crop"
-    },
-    {
       title: "Tech Startup Platform",
       description: "Modern SaaS website with user dashboard",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
     },
     {
       title: "Artisan Bakery",
       description: "E-commerce site with local delivery integration",
-      image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop"
+      image:
+        "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop",
     },
     {
       title: "Photography Portfolio",
       description: "Minimalist design with dynamic gallery features",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2000&auto=format&fit=crop"
+      image:
+        "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2000&auto=format&fit=crop",
     },
     {
       title: "Fitness Center",
       description: "Membership system with class scheduling",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
+      image:
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop",
     },
     {
       title: "Organic Skincare Brand",
       description: "Product showcase with e-commerce integration",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2000&auto=format&fit=crop"
-    }
+      image:
+        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2000&auto=format&fit=crop",
+    },
   ];
 
   return (
@@ -194,7 +194,7 @@ const Index = () => {
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg blur-lg opacity-50"></div>
                   <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
                     <img 
-                      src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" 
+                      src="https://images.unsplash.com/photo-1596178060873-8a5cd413c9fb?q=80&w=2069&auto=format&fit=crop" 
                       alt="Display showing web design process and analytics"
                       className="w-full h-auto" 
                     />
