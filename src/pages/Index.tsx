@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { ArrowDown, ArrowRight, Mail, Phone, Star, Search, Edit, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -641,7 +642,6 @@ const Index = () => {
             </div>
           </div>
         </section>
-      </main>
 
       <footer className="bg-gray-900 text-white py-16" aria-label="Website footer">
         <div className="container mx-auto px-4">
@@ -694,3 +694,4 @@ const Index = () => {
 };
 
 export default Index;
+
