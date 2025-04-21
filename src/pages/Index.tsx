@@ -20,6 +20,9 @@ const Index = () => {
     contact: false,
   });
 
+  // Add a new "about" section scroll visibility state
+  const [aboutVisible, setAboutVisible] = useState(false);
+
   useEffect(() => {
     setIsVisible(prev => ({ ...prev, hero: true }));
     
@@ -41,6 +44,28 @@ const Index = () => {
     sections.forEach(section => {
       observer.observe(section);
     });
+
+    // Add about section to observer
+    const aboutSection = document.getElementById("about");
+    if (aboutSection && observer) observer.observe(aboutSection);
+
+    // Animate navbar in on mount
+    setTimeout(() => {
+      const nav = document.getElementById("navbar-animated");
+      if (nav) nav.classList.add("animate-slide-in-down");
+    }, 100);
+
+    // Scroll reveal for about section
+    const aboutCallback = (entries: any) => {
+      entries.forEach((entry: any) => {
+        if (entry.isIntersecting) setAboutVisible(true);
+      });
+    };
+    if ("IntersectionObserver" in window && aboutSection) {
+      const aboutObserver = new IntersectionObserver(aboutCallback, { threshold: 0.3 });
+      aboutObserver.observe(aboutSection);
+      return () => aboutObserver.disconnect();
+    }
 
     return () => {
       sections.forEach(section => {
@@ -117,100 +142,177 @@ const Index = () => {
 
   return (
     <div className="overflow-x-hidden">
-      <header>
-        <nav className="fixed w-full bg-white/90 backdrop-blur-sm z-50 border-b border-orange-100" aria-label="Primary navigation">
-          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" className="flex items-center space-x-2" aria-label="Web Crave Home">
-              <img
-                src="/lovable-uploads/d97a8bfa-8eb2-41e4-9a26-4d4c928880dc.png"
-                alt="Web Crave logo"
-                className="w-10 h-10"
-                draggable={false}
-              />
-              <span className="text-2xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent select-none">
-                Web Crave
-              </span>
-            </a>
-            <div className="hidden md:flex space-x-8" role="navigation">
-              <a href="#services" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Services">Services</a>
-              <a href="#benefits" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Benefits">Benefits</a>
-              <a href="#portfolio" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Portfolio">Portfolio</a>
-              <a href="#testimonials" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Testimonials">Testimonials</a>
-              <a href="#contact" className="text-gray-700 hover:text-orange-500 transition duration-300" aria-label="Contact">Contact</a>
-            </div>
-            <Button className="bg-gradient-to-r from-orange-500 to-red-500 text-white"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              aria-label="Get Started - Contact Section"
-            >
-              Get Started
-            </Button>
-          </div>
-        </nav>
-      </header>
-
-      <main>
-        <section 
-          id="hero"
-          className={`min-h-screen pt-24 flex items-center bg-gradient-to-b from-orange-50 to-white transition-opacity duration-1000 ${isVisible.hero ? 'opacity-100' : 'opacity-0'}`}
-          aria-labelledby="hero-title"
-        >
-          <div className="container mx-auto px-4 py-20">
-            <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-1/2 mb-12 md:mb-0 transform transition-all duration-1000" 
-                  style={{ 
-                    transform: isVisible.hero ? 'translateX(0)' : 'translateX(-100px)',
-                    opacity: isVisible.hero ? 1 : 0 
-                  }}>
-                <h1 id="hero-title" className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Elevate</span> Your Digital Presence
-                </h1>
-                <p className="text-xl text-gray-700 mb-8">
-                  We design stunning websites that convert visitors into customers and rank higher in search results.
-                </p>
-                <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                  <Button 
-                    className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-red-500 hover:to-orange-500 text-white px-8 py-3 text-lg transition-all duration-300"
-                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                    aria-label="Get a Quote - Contact Section"
-                  >
-                    Get a Quote <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 text-lg"
-                    onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                    aria-label="View Our Work - Portfolio"
-                  >
-                    View Our Work
-                  </Button>
-                </div>
-              </div>
-              <div className="md:w-1/2 transform transition-all duration-1000" 
-                  style={{ 
-                    transform: isVisible.hero ? 'translateX(0)' : 'translateX(100px)',
-                    opacity: isVisible.hero ? 1 : 0 
-                  }}>
-                <div className="relative">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg blur-lg opacity-50"></div>
-                  <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
-                    <img 
-                      src="https://images.unsplash.com/photo-1596178060873-8a5cd413c9fb?q=80&w=2069&auto=format&fit=crop" 
-                      alt="Display showing web design process and analytics"
-                      className="w-full h-auto" 
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-center mt-20">
-              <a href="#services" className="animate-bounce bg-white p-2 w-10 h-10 ring-1 ring-orange-200 shadow-lg rounded-full flex items-center justify-center" aria-label="Scroll down to services">
-                <ArrowDown className="h-6 w-6 text-orange-500" />
+      {/* NAV BAR */}
+      <nav
+        id="navbar-animated"
+        className="fixed w-full z-50 transition-all border-b border-orange-100 bg-white/50 backdrop-blur-lg shadow-md animate-none"
+        aria-label="Primary navigation"
+      >
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <a
+            href="/"
+            className="flex items-center space-x-2 group"
+            aria-label="Web Crave Home"
+          >
+            <img
+              src="/lovable-uploads/d97a8bfa-8eb2-41e4-9a26-4d4c928880dc.png"
+              alt="Web Crave logo"
+              className="w-10 h-10"
+              draggable={false}
+            />
+            <span className="text-2xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent select-none transition-colors duration-300 group-hover:text-orange-500">
+              Web Crave
+            </span>
+          </a>
+          <div
+            className="hidden md:flex space-x-8"
+            role="navigation"
+          >
+            {[
+              { href: "#services", label: "Services" },
+              { href: "#benefits", label: "Benefits" },
+              { href: "#portfolio", label: "Portfolio" },
+              { href: "#testimonials", label: "Testimonials" },
+              { href: "#contact", label: "Contact" },
+            ].map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                className="relative transition-all duration-200 text-gray-700 hover:text-orange-500 px-1 nav-hover-underline"
+                aria-label={label}
+              >
+                {label}
               </a>
+            ))}
+          </div>
+          <Button
+            className="bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg hover:scale-105 transition-transform duration-200"
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            aria-label="Get Started - Contact Section"
+          >
+            Get Started
+          </Button>
+        </div>
+      </nav>
+
+      {/* HERO SECTION */}
+      <section
+        id="hero"
+        className={`min-h-screen pt-24 flex items-center bg-gradient-to-b from-orange-50 to-white transition-opacity duration-1000 ${isVisible.hero ? "opacity-100" : "opacity-0"
+          }`}
+        aria-labelledby="hero-title"
+      >
+        <div className="container mx-auto px-4 py-20">
+          <div className="flex flex-col md:flex-row items-center">
+            <div
+              className="md:w-1/2 mb-12 md:mb-0 transform transition-all duration-1000"
+              style={{
+                transform: isVisible.hero ? "translateX(0)" : "translateX(-100px)",
+                opacity: isVisible.hero ? 1 : 0,
+              }}
+            >
+              <h1 id="hero-title" className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Elevate</span> Your Digital Presence
+              </h1>
+              <p className="text-xl text-gray-700 mb-8">
+                We design stunning websites that convert visitors into customers and rank higher in search results.
+              </p>
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <Button
+                  className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-red-500 hover:to-orange-500 text-white px-8 py-3 text-lg transition-all duration-300 shadow-md hover:scale-105"
+                  onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                  aria-label="Get a Quote - Contact Section"
+                >
+                  Get a Quote <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 text-lg"
+                  onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}
+                  aria-label="View Our Work - Portfolio"
+                >
+                  View Our Work
+                </Button>
+              </div>
+            </div>
+            <div
+              className="md:w-1/2 transition-all duration-1000"
+              style={{
+                transform: isVisible.hero ? "translateX(0)" : "translateX(100px)",
+                opacity: isVisible.hero ? 1 : 0,
+              }}
+            >
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg blur-lg opacity-60"></div>
+                <div className="relative bg-white/80 rounded-xl shadow-2xl overflow-hidden group-hover:scale-105 transform transition-transform duration-300">
+                  {/* New, eye-catching image */}
+                  <img
+                    src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2000&auto=format&fit=crop"
+                    alt="Creative web design workspace"
+                    className="w-full h-auto transition-transform duration-400"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+          <div className="flex justify-center mt-20">
+            <a
+              href="#services"
+              className="animate-bounce bg-white p-2 w-10 h-10 ring-1 ring-orange-200 shadow-lg rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+              aria-label="Scroll down to services"
+            >
+              <ArrowDown className="h-6 w-6 text-orange-500" />
+            </a>
+          </div>
+        </div>
+      </section>
 
-        <section 
+      {/* ABOUT SECTION (NEW) */}
+      <section
+        id="about"
+        className={`py-20 bg-gradient-to-r from-orange-100/50 to-amber-50 transition-all duration-1000 ${aboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+          }`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="md:w-1/2 mb-8 md:mb-0 animate-fade-in">
+              <img
+                src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop"
+                alt="Creative digital agency team in action"
+                className="rounded-xl shadow-xl w-full"
+              />
+            </div>
+            <div className="md:w-1/2">
+              <h2 className="text-4xl font-bold mb-6">
+                About <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Web Crave</span>
+              </h2>
+              <p className="text-lg text-gray-600 mb-4">
+                <b>Web Crave</b> is a creative agency specializing in stunning websites, high-performance SEO, and irresistible branding. Our talented team blends art and strategy, using the latest technology to deliver pixel-perfect digital experiences that grow your business.
+              </p>
+              <ul className="grid grid-cols-1 gap-4 font-medium text-gray-700 mb-6">
+                <li className="flex items-center gap-2">
+                  <span className="bg-orange-200 rounded w-2 h-2 inline-block"></span> UI/UX design focused on real results
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="bg-red-200 rounded w-2 h-2 inline-block"></span> SEO that ranks and scales
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="bg-amber-200 rounded w-2 h-2 inline-block"></span> Custom branding that wows
+                </li>
+              </ul>
+              <Button
+                className="bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg hover:scale-105 transition-transform duration-200"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                aria-label="Start Your Project"
+              >
+                Let's Work Together
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section 
           id="services"
           className={`py-20 transition-opacity duration-1000 ${isVisible.services ? 'opacity-100' : 'opacity-0'}`}
         >
@@ -337,50 +439,53 @@ const Index = () => {
           </div>
         </section>
 
-        <section 
-          id="portfolio"
-          className={`py-20 transition-opacity duration-1000 ${isVisible.portfolio ? 'opacity-100' : 'opacity-0'}`}
-        >
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">Our <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Portfolio</span></h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Take a look at some of our recent projects
-              </p>
-            </div>
+      <section
+        id="portfolio"
+        className={`py-20 transition-opacity duration-1000 ${isVisible.portfolio ? "opacity-100" : "opacity-0"}`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Our <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Portfolio</span></h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Take a look at some of our recent projects
+            </p>
+          </div>
 
-            <div className="mx-auto max-w-5xl px-8">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {portfolioItems.map((item, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                      <div className="p-2">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-700 transform h-80">
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          <img 
-                            src={item.image} 
-                            alt={item.title} 
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
-                            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                            <p className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{item.description}</p>
-                          </div>
+          <div className="mx-auto max-w-5xl px-8">
+            <Carousel className="w-full portfolio-carousel">
+              <CarouselContent>
+                {portfolioItems.map((item, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="md:basis-1/2 lg:basis-1/3 transition-transform duration-500 hover:scale-105 animate-fade-in"
+                  >
+                    <div className="p-2">
+                      <div className="group relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-700 h-80 bg-gradient-to-br from-orange-100/30 to-white/60">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-8 group-hover:translate-y-0 transition-transform duration-400">
+                          <h3 className="text-xl font-semibold mb-2 drop-shadow-lg">{item.title}</h3>
+                          <p className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{item.description}</p>
                         </div>
                       </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <div className="flex justify-end space-x-2 mt-4">
-                  <CarouselPrevious className="relative -left-0" />
-                  <CarouselNext className="relative -right-0" />
-                </div>
-              </Carousel>
-            </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-end space-x-2 mt-4">
+                <CarouselPrevious className="relative -left-0 portfolio-carousel-btn" />
+                <CarouselNext className="relative -right-0 portfolio-carousel-btn" />
+              </div>
+            </Carousel>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section 
+      <section 
           id="testimonials"
           className={`py-20 bg-gradient-to-r from-orange-50 to-amber-50 transition-opacity duration-1000 ${isVisible.testimonials ? 'opacity-100' : 'opacity-0'}`}
         >
