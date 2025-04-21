@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { ArrowDown, ArrowRight, Mail, Phone, Star, Search, Edit, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -564,4 +565,29 @@ const Index = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">Contact</h4>
               <ul className="space-y-2">
-                <li
+                <li className="flex items-center text-gray-400">
+                  <Phone className="h-4 w-4 mr-2" /> +977 9806812912
+                </li>
+                <li className="flex items-center text-gray-400">
+                  <Mail className="h-4 w-4 mr-2" /> sg750053@gmail.com
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">© 2024 Web Crave. All rights reserved.</p>
+            <div className="mt-4 md:mt-0">
+              <ul className="flex space-x-8">
+                <li><a href="#" className="text-gray-400 hover:text-orange-500 text-sm">Privacy Policy</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-orange-500 text-sm">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Index;
